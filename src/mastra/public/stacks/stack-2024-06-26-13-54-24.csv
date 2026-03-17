@@ -1,0 +1,10 @@
+layer,technology,url
+Frontend,React,https://en.wikipedia.org/wiki/React
+Frontend,Next.js,https://en.wikipedia.org/wiki/Next.js
+Backend,Node.js,https://en.wikipedia.org/wiki/Node.js
+Backend,Express,https://en.wikipedia.org/wiki/Express
+Database,PostgreSQL,https://en.wikipedia.org/wiki/PostgreSQL
+Caching,Redis,https://en.wikipedia.org/wiki/Redis
+Containerization,Docker,https://en.wikipedia.org/wiki/Docker
+Hosting,AWS,https://en.wikipedia.org/wiki/Amazon_Web_Services
+Hosting,Vercel,https://en.wikipedia.org/wiki/Vercel
