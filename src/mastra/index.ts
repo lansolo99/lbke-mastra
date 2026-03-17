@@ -1,30 +1,42 @@
-
-import { Mastra } from '@mastra/core/mastra';
-import { PinoLogger } from '@mastra/loggers';
-import { LibSQLStore } from '@mastra/libsql';
-import { Observability, DefaultExporter, CloudExporter, SensitiveDataFilter } from '@mastra/observability';
-import { weatherWorkflow } from './workflows/weather-workflow';
-import { weatherAgent } from './agents/weather-agent';
-import { stackPickerAgent } from './agents/stackpicker-agent';
-import { toolCallAppropriatenessScorer, completenessScorer, translationScorer } from './scorers/weather-scorer';
+import { Mastra } from "@mastra/core/mastra";
+import { PinoLogger } from "@mastra/loggers";
+import { LibSQLStore } from "@mastra/libsql";
+import {
+  Observability,
+  DefaultExporter,
+  CloudExporter,
+  SensitiveDataFilter,
+} from "@mastra/observability";
+import { weatherWorkflow } from "./workflows/weather-workflow";
+import { weatherAgent } from "./agents/weather-agent";
+import { stackPickerAgent } from "./agents/stackpicker-agent";
+import {
+  toolCallAppropriatenessScorer,
+  completenessScorer,
+  translationScorer,
+} from "./scorers/weather-scorer";
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
   agents: { weatherAgent, stackPickerAgent },
-  scorers: { toolCallAppropriatenessScorer, completenessScorer, translationScorer },
+  scorers: {
+    toolCallAppropriatenessScorer,
+    completenessScorer,
+    translationScorer,
+  },
   storage: new LibSQLStore({
     id: "mastra-storage",
     // stores observability, scores, ... into persistent file storage
-    url: "file:./mastra.db",
+    url: "file:./mastra-1.db",
   }),
   logger: new PinoLogger({
-    name: 'Mastra',
-    level: 'info',
+    name: "Mastra",
+    level: "info",
   }),
   observability: new Observability({
     configs: {
       default: {
-        serviceName: 'mastra',
+        serviceName: "mastra",
         exporters: [
           new DefaultExporter(), // Persists traces to storage for Mastra Studio
           new CloudExporter(), // Sends traces to Mastra Cloud (if MASTRA_CLOUD_ACCESS_TOKEN is set)

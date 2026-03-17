@@ -1,4 +1,3 @@
-import { createLogRecordSchema } from "@mastra/core/storage";
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 
@@ -17,6 +16,7 @@ export const websearchTool = createTool({
     url: z.string(),
     summary: z.string(),
   }),
+  requireApproval: true,
   execute: async (inputData) => {
     const { technology } = inputData;
     const encoded = encodeURIComponent(technology);
@@ -24,8 +24,6 @@ export const websearchTool = createTool({
 
     const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encoded}`;
     const response = await fetch(apiUrl);
-    console.log(response);
-    console.log(response);
 
     if (!response.ok) {
       return {

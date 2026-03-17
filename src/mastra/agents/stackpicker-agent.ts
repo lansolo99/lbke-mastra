@@ -1,5 +1,6 @@
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
+import { LibSQLStore } from "@mastra/libsql";
 import { websearchTool } from "../tools/websearch-tool";
 
 export const stackPickerAgent = new Agent({
@@ -22,8 +23,48 @@ export const stackPickerAgent = new Agent({
       Never recommend a technology without first calling the websearchTool and displaying the returned URL.
       ALWAY USE THE SEACHWEBTOOLS!
 
+      You have access to working memory. Use it to track the user's project context across messages.
+      Update working memory whenever you learn new information about their project, constraints, or preferences.
 `,
   model: "openrouter/mistralai/codestral-2508",
   tools: { websearchTool },
-  memory: new Memory(),
+  memory: new Memory({
+    storage: new LibSQLStore({
+      id: "stackpicker-memory",
+      url: "file:./mastra.db",
+    }),
+    options: {
+      workingMemory: {
+        enabled: true,
+        scope: "resource",
+        template: `# Project Context
+
+## Project
+- Type:
+- Description:
+- Scale:
+
+## Constraints
+- Language/Runtime:
+- Budget:
+- Team size:
+- Deadline:
+- Other:
+
+## Chosen Stack
+- Frontend:
+- Backend:
+- Database:
+- Infrastructure:
+- Other:
+
+## User infos
+- Age:
+
+## Open Questions
+-
+`,
+      },
+    },
+  }),
 });
