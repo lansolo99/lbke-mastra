@@ -1,6 +1,5 @@
 import { z } from 'zod';
-import { createToolCallAccuracyScorerCode } from '@mastra/evals/scorers/prebuilt';
-import { createCompletenessScorer } from '@mastra/evals/scorers/prebuilt';
+import { createToolCallAccuracyScorerCode, createCompletenessScorer, createHallucinationScorer } from '@mastra/evals/scorers/prebuilt';
 import {
   getAssistantMessageFromRunOutput,
   getUserMessageFromRunInput,
@@ -13,6 +12,10 @@ export const toolCallAppropriatenessScorer = createToolCallAccuracyScorerCode({
 });
 
 export const completenessScorer = createCompletenessScorer();
+
+export const hallucinationScorer = createHallucinationScorer({
+  model: 'openrouter/mistralai/mistral-nemo',
+});
 
 // Custom LLM-judged scorer: evaluates if non-English locations are translated appropriately
 export const translationScorer = createScorer({
@@ -83,4 +86,5 @@ export const scorers = {
   toolCallAppropriatenessScorer,
   completenessScorer,
   translationScorer,
+  hallucinationScorer,
 };

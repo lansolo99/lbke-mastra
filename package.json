@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "mastra dev",
+    "ingest": "npx tsx src/mastra/rag/ingest-books.ts",
     "co": "npx tsx --env-file .env mastra-client-sdk.ts",
     "co-w": "npx tsx --env-file .env mastra-client-sdk-weather.ts",
     "build": "mastra build",

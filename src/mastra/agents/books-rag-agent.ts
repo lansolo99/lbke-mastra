@@ -6,6 +6,7 @@ import {
   booksVectorStore,
   BOOKS_INDEX_NAME,
 } from "../rag/vector-store.js";
+import { booksScorers } from "../scorers/books-rag-scorer.js";
 
 const vectorQueryTool = createVectorQueryTool({
   vectorStoreName: "books-vector-store",
@@ -25,4 +26,13 @@ Always base your answers on the retrieved context. If the context doesn't contai
 ${LIBSQL_PROMPT}
 `,
   tools: { vectorQueryTool },
+  scorers: {
+    contextualRelevancy: {
+      scorer: booksScorers.booksContextualRelevancyScorer,
+      sampling: {
+        type: "ratio",
+        rate: 1,
+      },
+    },
+  },
 });

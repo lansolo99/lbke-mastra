@@ -17,6 +17,7 @@ import {
   completenessScorer,
   translationScorer,
 } from "./scorers/weather-scorer";
+import { booksContextualRelevancyScorer } from "./scorers/books-rag-scorer.js";
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow, testWorkflow },
@@ -25,6 +26,7 @@ export const mastra = new Mastra({
     toolCallAppropriatenessScorer,
     completenessScorer,
     translationScorer,
+    booksContextualRelevancyScorer,
   },
   storage: new LibSQLStore({
     id: "mastra-storage",

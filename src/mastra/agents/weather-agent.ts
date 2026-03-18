@@ -46,6 +46,10 @@ export const weatherAgent = new Agent({
         rate: 1,
       },
     },
+    hallucinations: {
+      scorer: scorers.hallucinationScorer,
+      sampling: { type: "ratio", rate: 1 },
+    },
   },
   memory: new Memory(),
 });
