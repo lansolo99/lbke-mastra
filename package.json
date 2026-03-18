@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "mastra dev",
+    "co": "npx tsx --env-file .env mastra-client-sdk.ts",
+    "co-w": "npx tsx --env-file .env mastra-client-sdk-weather.ts",
     "build": "mastra build",
     "start": "mastra start"
   },
@@ -17,6 +19,7 @@
     "node": ">=22.13.0"
   },
   "dependencies": {
+    "@mastra/client-js": "^1.9.0",
     "@mastra/core": "^1.13.2",
     "@mastra/evals": "^1.1.2",
     "@mastra/fastembed": "^1.0.1",
@@ -27,6 +30,7 @@
     "@mastra/observability": "^1.5.0",
     "@mastra/rag": "^2.1.2",
     "@types/pdf-parse": "^1.1.5",
+    "add": "^2.0.6",
     "ai": "^6.0.116",
     "pdf-parse": "^2.4.5",
     "zod": "^4.3.6"
