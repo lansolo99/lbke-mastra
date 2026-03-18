@@ -9,6 +9,8 @@ import {
 import { LangfuseExporter } from "@mastra/langfuse";
 import { weatherWorkflow } from "./workflows/weather-workflow";
 import { testWorkflow } from "./workflows/test-workflow";
+import { docIngestionWorkflow } from "./workflows/doc-ingestion";
+import { chromaRagWorkflow } from "./workflows/chroma-rag-workflow";
 import { weatherAgent } from "./agents/weather-agent";
 import { stackPickerAgent } from "./agents/stackpicker-agent";
 import { booksRagAgent } from "./agents/books-rag-agent";
@@ -20,7 +22,7 @@ import {
 import { booksContextualRelevancyScorer } from "./scorers/books-rag-scorer.js";
 
 export const mastra = new Mastra({
-  workflows: { weatherWorkflow, testWorkflow },
+  workflows: { weatherWorkflow, testWorkflow, docIngestionWorkflow, chromaRagWorkflow },
   agents: { weatherAgent, stackPickerAgent, booksRagAgent },
   scorers: {
     toolCallAppropriatenessScorer,
